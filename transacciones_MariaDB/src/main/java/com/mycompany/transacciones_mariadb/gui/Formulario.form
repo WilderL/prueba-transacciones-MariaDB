@@ -35,6 +35,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane1" pref="483" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -56,16 +57,16 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="Apellido_textfield" max="32767" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="star_jbutton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="guardar_jbutton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="commit_jbutton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="rollback_jbutton" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                  </Group>
-                  <Component id="jScrollPane1" pref="488" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="guardar_jbutton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="commit_jbutton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="rollback_jbutton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -109,6 +110,7 @@
                   <Component id="guardar_jbutton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="commit_jbutton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="rollback_jbutton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="star_jbutton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -233,6 +235,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Guardar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="commit_jbutton">
@@ -241,6 +244,7 @@
           <Color blue="33" green="ff" red="33" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Commit"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="rollback_jbutton">
@@ -249,6 +253,13 @@
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Rollback"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="star_jbutton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Iniciar transaccion"/>
+        <Property name="actionCommand" type="java.lang.String" value="Iniciar transacci&#xf3;n"/>
       </Properties>
     </Component>
   </SubComponents>

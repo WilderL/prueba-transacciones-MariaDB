@@ -4,17 +4,30 @@
  */
 package com.mycompany.transacciones_mariadb.gui;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 /**
  *
  * @author User
  */
 public class Formulario extends javax.swing.JFrame {
 
+    private Connection conexion;
+    
     /**
-     * Creates new form Formulario
+     *
+     * @param conexion
+     * @throws SQLException
      */
-    public Formulario() {
+    public Formulario(Connection conexion) throws SQLException {
         initComponents();
+        this.conexion = conexion;
+        
+    }
+
+    private Formulario() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -41,6 +54,7 @@ public class Formulario extends javax.swing.JFrame {
         guardar_jbutton = new javax.swing.JButton();
         commit_jbutton = new javax.swing.JButton();
         rollback_jbutton = new javax.swing.JButton();
+        star_jbutton = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -100,12 +114,18 @@ public class Formulario extends javax.swing.JFrame {
         guardar_jbutton.setBackground(new java.awt.Color(0, 51, 153));
         guardar_jbutton.setForeground(new java.awt.Color(255, 255, 255));
         guardar_jbutton.setText("Guardar");
+        guardar_jbutton.setEnabled(false);
 
         commit_jbutton.setBackground(new java.awt.Color(51, 255, 51));
         commit_jbutton.setText("Commit");
+        commit_jbutton.setEnabled(false);
 
         rollback_jbutton.setBackground(new java.awt.Color(255, 0, 0));
         rollback_jbutton.setText("Rollback");
+        rollback_jbutton.setEnabled(false);
+
+        star_jbutton.setText("Iniciar transaccion");
+        star_jbutton.setActionCommand("Iniciar transacción");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,6 +133,7 @@ public class Formulario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,15 +150,15 @@ public class Formulario extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Apellido_textfield))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(guardar_jbutton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(commit_jbutton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rollback_jbutton)))
+                                .addComponent(Apellido_textfield))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(star_jbutton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(guardar_jbutton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(commit_jbutton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rollback_jbutton)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -171,7 +192,8 @@ public class Formulario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardar_jbutton)
                     .addComponent(commit_jbutton)
-                    .addComponent(rollback_jbutton))
+                    .addComponent(rollback_jbutton)
+                    .addComponent(star_jbutton))
                 .addContainerGap())
         );
 
@@ -229,5 +251,6 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton rollback_jbutton;
+    private javax.swing.JButton star_jbutton;
     // End of variables declaration//GEN-END:variables
 }
