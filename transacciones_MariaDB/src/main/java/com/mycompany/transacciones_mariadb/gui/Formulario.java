@@ -97,17 +97,17 @@ public class Formulario extends javax.swing.JFrame {
 
         datos_jtable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nombres", "Apellidos", "Dirección ", "Telefonos"
+                "ID", "Nombres", "Apellidos", "Dirección ", "Telefonos"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -120,6 +120,7 @@ public class Formulario extends javax.swing.JFrame {
             datos_jtable.getColumnModel().getColumn(1).setResizable(false);
             datos_jtable.getColumnModel().getColumn(2).setResizable(false);
             datos_jtable.getColumnModel().getColumn(3).setResizable(false);
+            datos_jtable.getColumnModel().getColumn(4).setResizable(false);
         }
 
         guardar_jbutton.setBackground(new java.awt.Color(0, 51, 153));
@@ -144,7 +145,7 @@ public class Formulario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
