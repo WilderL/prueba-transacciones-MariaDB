@@ -6,6 +6,9 @@ package com.mycompany.transacciones_mariadb.gui;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import com.mycompany.transacciones_mariadb.mariaDB.ConexionCliente;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,6 +17,7 @@ import java.sql.SQLException;
 public class Formulario extends javax.swing.JFrame {
 
     private Connection conexion;
+    private ConexionCliente clientes;
     
     /**
      *
@@ -23,6 +27,13 @@ public class Formulario extends javax.swing.JFrame {
     public Formulario(Connection conexion) throws SQLException {
         initComponents();
         this.conexion = conexion;
+        clientes = new ConexionCliente();
+    }
+    
+    
+    public void begintable(){
+        DefaultTableModel model = (DefaultTableModel) datos_jtable.getModel();
+        model.setRowCount(0); // Limpiar los datos existentes
         
     }
 
