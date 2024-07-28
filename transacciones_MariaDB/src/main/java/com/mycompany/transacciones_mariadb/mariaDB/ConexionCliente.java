@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class ConexionCliente {
 
     public ResultSet consulta(Connection conexion) throws SQLException{
-        String sql = "SELECT * FROM Cliente C"
+        String sql = "SELECT C.*, T.Numero FROM Cliente C "
                 + "INNER JOIN Telefono T ON C.ID_Cliente=T.Cliente_ID_Cliente";
         PreparedStatement stmt = conexion.prepareStatement(sql);
         
