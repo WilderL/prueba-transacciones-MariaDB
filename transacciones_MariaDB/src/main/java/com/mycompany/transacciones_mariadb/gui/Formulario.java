@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author User
  */
-public class Formulario extends javax.swing.JFrame {
+public final class Formulario extends javax.swing.JFrame {
 
     private Connection conexion;
     private ConexionCliente clientes;
@@ -24,17 +24,26 @@ public class Formulario extends javax.swing.JFrame {
      * @param conexion
      * @throws SQLException
      */
-    public Formulario(Connection conexion) throws SQLException {
-        initComponents();
+    public Formulario(Connection conexion) throws SQLException { 
         this.conexion = conexion;
         clientes = new ConexionCliente();
+        initComponents();
+        begintable();
     }
     
     
-    public void begintable(){
+    public void begintable() throws SQLException{
         DefaultTableModel model = (DefaultTableModel) datos_jtable.getModel();
         model.setRowCount(0); // Limpiar los datos existentes
-        
+        ResultSet resultados = clientes.consulta(conexion);
+        while (resultados.next()) {
+            int id = resultados.getInt("ID_Cliente");
+            String nombre = resultados.getString("Nombre");
+            String Apellido = resultados.getString("Apellido");
+            String Direccion = resultados.getString("Direccion");
+            String telefono  = resultados.getString("Numero");
+            model.addRow(new Object[]{id, nombre, Apellido, Direccion, telefono});
+        }
     }
 
     private Formulario() {
@@ -175,7 +184,7 @@ public class Formulario extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(156, 156, 156))
+                .addGap(215, 215, 215))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
