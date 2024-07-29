@@ -24,13 +24,13 @@ public final class Formulario extends javax.swing.JFrame {
     private ConexionCliente clientes;
     private Conexion conection;
     private ConexionTelefono telefono;
-    
+
     /**
      *
      * @param conexion
      * @throws SQLException
      */
-    public Formulario(Connection conexion) throws SQLException { 
+    public Formulario(Connection conexion) throws SQLException {
         this.conexion = conexion;
         clientes = new ConexionCliente();
         conection = new Conexion();
@@ -38,9 +38,8 @@ public final class Formulario extends javax.swing.JFrame {
         initComponents();
         begintable();
     }
-    
-    
-    public void begintable() throws SQLException{
+
+    public void begintable() throws SQLException {
         DefaultTableModel model = (DefaultTableModel) datos_jtable.getModel();
         model.setRowCount(0); // Limpiar los datos existentes
         ResultSet resultados = clientes.consulta(conexion);
@@ -49,18 +48,18 @@ public final class Formulario extends javax.swing.JFrame {
             String nombre = resultados.getString("Nombre");
             String Apellido = resultados.getString("Apellido");
             String Direccion = resultados.getString("Direccion");
-            String telefono  = resultados.getString("Numero");
+            String telefono = resultados.getString("Numero");
             model.addRow(new Object[]{id, nombre, Apellido, Direccion, telefono});
         }
     }
-    
-    public void clean(){
+
+    public void clean() {
         Nombre_textfield.setText("");
         Apellido_textfield.setText("");
         Direccion_textfield.setText("");
         Telefonos_textfield.setText("");
     }
-    
+
     private Formulario() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -279,9 +278,13 @@ public final class Formulario extends javax.swing.JFrame {
         String direccion = Direccion_textfield.getText();
         String telefonos = Telefonos_textfield.getText();
         try {
-            clientes.insertar(conexion, nombre, apellido, direccion);
             ResultSet id = clientes.getIdCliente(conexion, nombre, apellido);
-            id.next();
+            if (!id.next()) {
+                clientes.insertar(conexion, nombre, apellido, direccion);
+                id = clientes.getIdCliente(conexion, nombre, apellido);
+                id.next();
+            }
+
             String id1 = id.getString("ID_Cliente");
             String[] partes = telefonos.split(",");
             for (String parte : partes) {
