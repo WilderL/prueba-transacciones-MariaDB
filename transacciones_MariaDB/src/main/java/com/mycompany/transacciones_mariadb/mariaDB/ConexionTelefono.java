@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class ConexionTelefono {
     public boolean insertar(Connection conexion, String numero, String idCliente
             ) throws SQLException{
-        String sql = "INSERT INTO Cliente (Numero, Cliente_ID_Cliente) "
+        String sql = "INSERT INTO Telefono (Numero, Cliente_ID_Cliente) "
                 + "VALUES (?, ?)";
         PreparedStatement stmt = conexion.prepareStatement(sql);
         stmt.setString(1, numero);

@@ -23,7 +23,7 @@ public class ConexionCliente {
     
     public ResultSet getIdCliente(Connection conexion, String nombre, 
             String apellido) throws SQLException{
-        String sql = "SELECT id FROM Cliente WHERE Nombre=?, Apellido=?";
+        String sql = "SELECT ID_Cliente FROM Cliente WHERE Nombre = ? AND Apellido = ?";
         PreparedStatement stmt = conexion.prepareStatement(sql);
         stmt.setString(1, nombre);
         stmt.setString(2, apellido);
