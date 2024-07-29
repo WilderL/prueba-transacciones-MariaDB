@@ -7,7 +7,11 @@ package com.mycompany.transacciones_mariadb.gui;
 import java.sql.Connection;
 import java.sql.SQLException;
 import com.mycompany.transacciones_mariadb.mariaDB.ConexionCliente;
+import com.mycompany.transacciones_mariadb.mariaDB.Conexion;
+import com.mycompany.transacciones_mariadb.mariaDB.ConexionTelefono;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,6 +22,8 @@ public final class Formulario extends javax.swing.JFrame {
 
     private Connection conexion;
     private ConexionCliente clientes;
+    private Conexion conection;
+    private ConexionTelefono telefono;
     
     /**
      *
@@ -27,6 +33,8 @@ public final class Formulario extends javax.swing.JFrame {
     public Formulario(Connection conexion) throws SQLException { 
         this.conexion = conexion;
         clientes = new ConexionCliente();
+        conection = new Conexion();
+        telefono = new ConexionTelefono();
         initComponents();
         begintable();
     }
@@ -45,7 +53,7 @@ public final class Formulario extends javax.swing.JFrame {
             model.addRow(new Object[]{id, nombre, Apellido, Direccion, telefono});
         }
     }
-
+    
     private Formulario() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -75,6 +83,7 @@ public final class Formulario extends javax.swing.JFrame {
         commit_jbutton = new javax.swing.JButton();
         rollback_jbutton = new javax.swing.JButton();
         star_jbutton = new javax.swing.JButton();
+        Actualizar = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -136,17 +145,44 @@ public final class Formulario extends javax.swing.JFrame {
         guardar_jbutton.setForeground(new java.awt.Color(255, 255, 255));
         guardar_jbutton.setText("Guardar");
         guardar_jbutton.setEnabled(false);
+        guardar_jbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardar_jbuttonActionPerformed(evt);
+            }
+        });
 
         commit_jbutton.setBackground(new java.awt.Color(51, 255, 51));
         commit_jbutton.setText("Commit");
         commit_jbutton.setEnabled(false);
+        commit_jbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                commit_jbuttonActionPerformed(evt);
+            }
+        });
 
         rollback_jbutton.setBackground(new java.awt.Color(255, 0, 0));
         rollback_jbutton.setText("Rollback");
         rollback_jbutton.setEnabled(false);
+        rollback_jbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rollback_jbuttonActionPerformed(evt);
+            }
+        });
 
         star_jbutton.setText("Iniciar transaccion");
         star_jbutton.setActionCommand("Iniciar transacción");
+        star_jbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                star_jbuttonActionPerformed(evt);
+            }
+        });
+
+        Actualizar.setText("Actualizar");
+        Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,7 +190,7 @@ public final class Formulario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +212,9 @@ public final class Formulario extends javax.swing.JFrame {
                                 .addComponent(star_jbutton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(guardar_jbutton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(56, 56, 56)
+                                .addComponent(Actualizar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                                 .addComponent(commit_jbutton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(rollback_jbutton)))))
@@ -214,12 +252,65 @@ public final class Formulario extends javax.swing.JFrame {
                     .addComponent(guardar_jbutton)
                     .addComponent(commit_jbutton)
                     .addComponent(rollback_jbutton)
-                    .addComponent(star_jbutton))
+                    .addComponent(star_jbutton)
+                    .addComponent(Actualizar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void star_jbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_star_jbuttonActionPerformed
+        guardar_jbutton.setEnabled(true);
+        commit_jbutton.setEnabled(true);
+        rollback_jbutton.setEnabled(true);
+        star_jbutton.setEnabled(false);
+        conection.iniciarTransaccion(conexion);
+    }//GEN-LAST:event_star_jbuttonActionPerformed
+
+    private void guardar_jbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_jbuttonActionPerformed
+        String nombre = Nombre_textfield.getText();
+        String apellido = Apellido_textfield.getText();
+        String direccion = Direccion_textfield.getText();
+        String telefonos = Telefonos_textfield.getText();
+        try {
+            clientes.insertar(conexion, nombre, apellido, direccion);
+            ResultSet id = clientes.getIdCliente(conexion, nombre, apellido);
+            id.next();
+            String id1 = id.getString("id");
+            String[] partes = telefonos.split(",");
+            for (String parte : partes) {
+                telefono.insertar(conexion, parte, id1);
+            }
+            begintable();
+        } catch (SQLException ex) {
+            Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_guardar_jbuttonActionPerformed
+
+    private void commit_jbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commit_jbuttonActionPerformed
+        conection.commitTransaccion(conexion);
+        guardar_jbutton.setEnabled(false);
+        rollback_jbutton.setEnabled(false);
+        commit_jbutton.setEnabled(false);
+        star_jbutton.setEnabled(true);
+    }//GEN-LAST:event_commit_jbuttonActionPerformed
+
+    private void rollback_jbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollback_jbuttonActionPerformed
+        conection.rollbackTransaccion(conexion);
+        guardar_jbutton.setEnabled(false);
+        rollback_jbutton.setEnabled(false);
+        commit_jbutton.setEnabled(false);
+        star_jbutton.setEnabled(true);
+    }//GEN-LAST:event_rollback_jbuttonActionPerformed
+
+    private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
+        try {
+            begintable();
+        } catch (SQLException ex) {
+            Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_ActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,6 +348,7 @@ public final class Formulario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Actualizar;
     private javax.swing.JTextField Apellido_textfield;
     private javax.swing.JTextField Direccion_textfield;
     private javax.swing.JTextField Nombre_textfield;
