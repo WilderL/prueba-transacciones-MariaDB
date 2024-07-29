@@ -54,6 +54,13 @@ public final class Formulario extends javax.swing.JFrame {
         }
     }
     
+    public void clean(){
+        Nombre_textfield.setText("");
+        Apellido_textfield.setText("");
+        Direccion_textfield.setText("");
+        Telefonos_textfield.setText("");
+    }
+    
     private Formulario() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -105,13 +112,11 @@ public final class Formulario extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("APELLIDOS");
 
-        Nombre_textfield.setText("jTextField2");
-
-        Apellido_textfield.setText("jTextField2");
-
-        Direccion_textfield.setText("jTextField2");
-
-        Telefonos_textfield.setText("jTextField2");
+        Apellido_textfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Apellido_textfieldActionPerformed(evt);
+            }
+        });
 
         datos_jtable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -286,6 +291,7 @@ public final class Formulario extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
         }
+        clean();
     }//GEN-LAST:event_guardar_jbuttonActionPerformed
 
     private void commit_jbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commit_jbuttonActionPerformed
@@ -294,6 +300,7 @@ public final class Formulario extends javax.swing.JFrame {
         rollback_jbutton.setEnabled(false);
         commit_jbutton.setEnabled(false);
         star_jbutton.setEnabled(true);
+        clean();
     }//GEN-LAST:event_commit_jbuttonActionPerformed
 
     private void rollback_jbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollback_jbuttonActionPerformed
@@ -302,6 +309,7 @@ public final class Formulario extends javax.swing.JFrame {
         rollback_jbutton.setEnabled(false);
         commit_jbutton.setEnabled(false);
         star_jbutton.setEnabled(true);
+        clean();
     }//GEN-LAST:event_rollback_jbuttonActionPerformed
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
@@ -311,6 +319,10 @@ public final class Formulario extends javax.swing.JFrame {
             Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ActualizarActionPerformed
+
+    private void Apellido_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Apellido_textfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Apellido_textfieldActionPerformed
 
     /**
      * @param args the command line arguments
