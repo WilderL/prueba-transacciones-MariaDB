@@ -372,34 +372,45 @@ public final class Formulario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Se ha agregado exitósamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            JOptionPane.showMessageDialog(this, "Tiempo limite excedido", "Error", JOptionPane.ERROR_MESSAGE);
+        } 
         clean();
     }//GEN-LAST:event_guardar_jbuttonActionPerformed
 
     private void commit_jbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commit_jbuttonActionPerformed
-        conection.commitTransaccion(conexion);
-        guardar_jbutton.setEnabled(false);
-        rollback_jbutton.setEnabled(false);
-        commit_jbutton.setEnabled(false);
-        star_jbutton.setEnabled(true);
-        read_commitedbutton.setEnabled(true);
-        read_uncommitedbutton.setEnabled(true);
-        repeteable_readbutton.setEnabled(true);
-        serializable_button.setEnabled(true);
-        clean();
+        try {
+            conection.commitTransaccion(conexion);
+            guardar_jbutton.setEnabled(false);
+            rollback_jbutton.setEnabled(false);
+            commit_jbutton.setEnabled(false);
+            star_jbutton.setEnabled(true);
+            read_commitedbutton.setEnabled(true);
+            read_uncommitedbutton.setEnabled(true);
+            repeteable_readbutton.setEnabled(true);
+            serializable_button.setEnabled(true);
+            begintable();
+            clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_commit_jbuttonActionPerformed
 
     private void rollback_jbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollback_jbuttonActionPerformed
-        conection.rollbackTransaccion(conexion);
-        guardar_jbutton.setEnabled(false);
-        rollback_jbutton.setEnabled(false);
-        commit_jbutton.setEnabled(false);
-        star_jbutton.setEnabled(true);
-        read_commitedbutton.setEnabled(true);
-        read_uncommitedbutton.setEnabled(true);
-        repeteable_readbutton.setEnabled(true);
-        serializable_button.setEnabled(true);
-        clean();
+        try {
+            conection.rollbackTransaccion(conexion);
+            guardar_jbutton.setEnabled(false);
+            rollback_jbutton.setEnabled(false);
+            commit_jbutton.setEnabled(false);
+            star_jbutton.setEnabled(true);
+            read_commitedbutton.setEnabled(true);
+            read_uncommitedbutton.setEnabled(true);
+            repeteable_readbutton.setEnabled(true);
+            serializable_button.setEnabled(true);
+            begintable();
+            clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_rollback_jbuttonActionPerformed
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
