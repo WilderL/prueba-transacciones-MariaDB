@@ -78,18 +78,17 @@ public class Conexion {
         }
     }
     
-    // Método para establecer el nivel de aislamiento
     /**
-     * Método para establecer el nivel de aislameinto de una coneción.
-     * 1 -> read uncomitted
-     * 2 -> read committed 
-     * 3 -> reapetable read (default)
-     * 4 -> Serializable
-     * 
-     * @param conexion Coneción a la base de datos que se esta utilizando.
-     * @param nivel Modificador de nivel de aislamiento mediante un numero.
-     * @return Un booleano si se puedo cambiar el nivel de aislamiento.
-     */
+    * Método para establecer el nivel de aislamiento de una conexión.<br>
+    * 1 -> READ UNCOMMITTED<br>
+    * 2 -> READ COMMITTED<br>
+    * 3 -> REPEATABLE READ (default)<br>
+    * 4 -> SERIALIZABLE<br>
+    * 
+    * @param conexion Conexión a la base de datos que se está utilizando.
+    * @param nivel Modificador de nivel de aislamiento mediante un número.
+    * @return Un booleano que indica si se pudo cambiar el nivel de aislamiento.
+    */
     private boolean establecerNivelAislamiento(Connection conexion, int nivel) {
         try {
             conexion.setTransactionIsolation(nivel);
