@@ -77,4 +77,47 @@ public class Conexion {
             return false;
         }
     }
+    
+    // Método para establecer el nivel de aislamiento
+    /**
+     * Método para establecer el nivel de aislameinto de una coneción.
+     * 1 -> read uncomitted
+     * 2 -> read committed 
+     * 3 -> reapetable read (default)
+     * 4 -> Serializable
+     * 
+     * @param conexion Coneción a la base de datos que se esta utilizando.
+     * @param nivel Modificador de nivel de aislamiento mediante un numero.
+     * @return Un booleano si se puedo cambiar el nivel de aislamiento.
+     */
+    private boolean establecerNivelAislamiento(Connection conexion, int nivel) {
+        try {
+            conexion.setTransactionIsolation(nivel);
+            System.out.println("Nivel de aislamiento establecido a: " + nivel);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error al establecer el nivel de aislamiento: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // read uncomitted
+    public boolean establecerReadUncommitted(Connection conexion) {
+        return establecerNivelAislamiento(conexion, Connection.TRANSACTION_READ_UNCOMMITTED);
+    }
+
+    // read committed 
+    public boolean establecerReadCommitted(Connection conexion) {
+        return establecerNivelAislamiento(conexion, Connection.TRANSACTION_READ_COMMITTED);
+    }
+
+    // reapetable read (default)
+    public boolean establecerRepeatableRead(Connection conexion) {
+        return establecerNivelAislamiento(conexion, Connection.TRANSACTION_REPEATABLE_READ);
+    }
+    
+    // Serializable
+    public boolean establecerSerializable(Connection conexion) {
+        return establecerNivelAislamiento(conexion, Connection.TRANSACTION_SERIALIZABLE);
+    }
 }
