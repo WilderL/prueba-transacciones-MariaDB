@@ -329,11 +329,25 @@ public final class Formulario extends javax.swing.JFrame {
         commit_jbutton.setEnabled(true);
         rollback_jbutton.setEnabled(true);
         star_jbutton.setEnabled(false);
+        if (read_commitedbutton.isSelected()){
+            conection.establecerReadCommitted(conexion);
+        }
+        else if (read_uncommitedbutton.isSelected()){
+            conection.establecerReadUncommitted(conexion);
+        }
+        else if (repeteable_readbutton.isSelected()){
+            conection.establecerRepeatableRead(conexion);
+        }
+        else if (serializable_button.isSelected()){
+            conection.establecerSerializable(conexion);
+        }
+        
         conection.iniciarTransaccion(conexion);
         read_commitedbutton.setEnabled(false);
         read_uncommitedbutton.setEnabled(false);
         repeteable_readbutton.setEnabled(false);
         serializable_button.setEnabled(false);
+        
     }//GEN-LAST:event_star_jbuttonActionPerformed
 
     private void guardar_jbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_jbuttonActionPerformed
