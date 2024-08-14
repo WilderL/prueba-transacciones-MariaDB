@@ -12,6 +12,8 @@ import com.mycompany.transacciones_mariadb.mariaDB.ConexionTelefono;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,6 +38,12 @@ public final class Formulario extends javax.swing.JFrame {
         conection = new Conexion();
         telefono = new ConexionTelefono();
         initComponents();
+        ButtonGroup group = new ButtonGroup();
+        group.add(read_commitedbutton);
+        group.add(read_uncommitedbutton);
+        group.add(repeteable_readbutton);
+        group.add(serializable_button);
+        repeteable_readbutton.setSelected(true);
         begintable();
     }
 
@@ -74,6 +82,9 @@ public final class Formulario extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -90,8 +101,15 @@ public final class Formulario extends javax.swing.JFrame {
         rollback_jbutton = new javax.swing.JButton();
         star_jbutton = new javax.swing.JButton();
         Actualizar = new javax.swing.JButton();
+        read_uncommitedbutton = new javax.swing.JRadioButton();
+        read_commitedbutton = new javax.swing.JRadioButton();
+        repeteable_readbutton = new javax.swing.JRadioButton();
+        serializable_button = new javax.swing.JRadioButton();
+        jLabel6 = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
+
+        jRadioButton1.setText("jRadioButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
@@ -188,6 +206,27 @@ public final class Formulario extends javax.swing.JFrame {
             }
         });
 
+        read_uncommitedbutton.setText("Read_uncommited");
+        read_uncommitedbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                read_uncommitedbuttonActionPerformed(evt);
+            }
+        });
+
+        read_commitedbutton.setText("Read_commited");
+
+        repeteable_readbutton.setText("Repeteable_read");
+        repeteable_readbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                repeteable_readbuttonActionPerformed(evt);
+            }
+        });
+
+        serializable_button.setText("Serializable");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setText("Selección del nivel de aislamiento:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,36 +248,57 @@ public final class Formulario extends javax.swing.JFrame {
                                     .addComponent(Direccion_textfield, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(Telefonos_textfield, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Apellido_textfield))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(star_jbutton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(guardar_jbutton)
                                 .addGap(56, 56, 56)
                                 .addComponent(Actualizar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(commit_jbutton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(rollback_jbutton)))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Apellido_textfield))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addComponent(read_uncommitedbutton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(read_commitedbutton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(repeteable_readbutton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(serializable_button)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(215, 215, 215))
+                .addGap(280, 280, 280))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(read_uncommitedbutton)
+                    .addComponent(read_commitedbutton)
+                    .addComponent(repeteable_readbutton)
+                    .addComponent(serializable_button)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(Nombre_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(Apellido_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -246,18 +306,18 @@ public final class Formulario extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(Direccion_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(Telefonos_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(guardar_jbutton)
                     .addComponent(commit_jbutton)
                     .addComponent(rollback_jbutton)
-                    .addComponent(star_jbutton)
-                    .addComponent(Actualizar))
+                    .addComponent(Actualizar)
+                    .addComponent(guardar_jbutton)
+                    .addComponent(star_jbutton))
                 .addContainerGap())
         );
 
@@ -270,6 +330,10 @@ public final class Formulario extends javax.swing.JFrame {
         rollback_jbutton.setEnabled(true);
         star_jbutton.setEnabled(false);
         conection.iniciarTransaccion(conexion);
+        read_commitedbutton.setEnabled(false);
+        read_uncommitedbutton.setEnabled(false);
+        repeteable_readbutton.setEnabled(false);
+        serializable_button.setEnabled(false);
     }//GEN-LAST:event_star_jbuttonActionPerformed
 
     private void guardar_jbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_jbuttonActionPerformed
@@ -291,6 +355,7 @@ public final class Formulario extends javax.swing.JFrame {
                 telefono.insertar(conexion, parte, id1);
             }
             begintable();
+            JOptionPane.showMessageDialog(this, "Se ha agregado exitósamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -303,6 +368,10 @@ public final class Formulario extends javax.swing.JFrame {
         rollback_jbutton.setEnabled(false);
         commit_jbutton.setEnabled(false);
         star_jbutton.setEnabled(true);
+        read_commitedbutton.setEnabled(true);
+        read_uncommitedbutton.setEnabled(true);
+        repeteable_readbutton.setEnabled(true);
+        serializable_button.setEnabled(true);
         clean();
     }//GEN-LAST:event_commit_jbuttonActionPerformed
 
@@ -312,6 +381,10 @@ public final class Formulario extends javax.swing.JFrame {
         rollback_jbutton.setEnabled(false);
         commit_jbutton.setEnabled(false);
         star_jbutton.setEnabled(true);
+        read_commitedbutton.setEnabled(true);
+        read_uncommitedbutton.setEnabled(true);
+        repeteable_readbutton.setEnabled(true);
+        serializable_button.setEnabled(true);
         clean();
     }//GEN-LAST:event_rollback_jbuttonActionPerformed
 
@@ -327,6 +400,14 @@ public final class Formulario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Apellido_textfieldActionPerformed
 
+    private void read_uncommitedbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_read_uncommitedbuttonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_read_uncommitedbuttonActionPerformed
+
+    private void repeteable_readbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repeteable_readbuttonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_repeteable_readbuttonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Actualizar;
@@ -334,6 +415,8 @@ public final class Formulario extends javax.swing.JFrame {
     private javax.swing.JTextField Direccion_textfield;
     private javax.swing.JTextField Nombre_textfield;
     private javax.swing.JTextField Telefonos_textfield;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton commit_jbutton;
     private javax.swing.JTable datos_jtable;
     private javax.swing.JButton guardar_jbutton;
@@ -342,9 +425,15 @@ public final class Formulario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JRadioButton read_commitedbutton;
+    private javax.swing.JRadioButton read_uncommitedbutton;
+    private javax.swing.JRadioButton repeteable_readbutton;
     private javax.swing.JButton rollback_jbutton;
+    private javax.swing.JRadioButton serializable_button;
     private javax.swing.JButton star_jbutton;
     // End of variables declaration//GEN-END:variables
 }
